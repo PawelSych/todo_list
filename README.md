@@ -12,3 +12,6 @@ AddUser
 AddTask
 ![20250329-0823-19_http127 0 0 15000newtask_-_My_Workspace_5216](https://github.com/user-attachments/assets/ab1cd4ad-9711-4377-9200-efdd58ae8412)
 ![20250329-0823-30_Oracle_SQL_Developer__Table_PAWEL TASKS@mydb_5217](https://github.com/user-attachments/assets/314bf445-61f5-4f2c-ad1d-0802bc50b006)
+
+GetTasks:
+![image](https://github.com/user-attachments/assets/b52b6449-ea45-4976-98f9-209002bbbb59)
