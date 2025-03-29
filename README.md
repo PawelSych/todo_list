@@ -24,3 +24,63 @@ Login:
 LogOut:
 ![image](https://github.com/user-attachments/assets/a61b08c1-28ac-47d6-a434-ba2250b5afc3)
 
+
+
+The project implements the following endpoints:
+
+---
+
+Add User (POST /users):
+
+- Handled by `addUser.py`  
+- Adds a new user to the database
+
+---
+
+Add Task (POST /newtask):
+
+- Handled by `addTask.py`  
+- Adds a new task assigned to a specific user
+
+---
+
+Get Tasks (GET /tasks?user_id=<id>):
+
+- Handled by `getTasks.py`  
+- Returns a list of tasks for the specified `user_id`
+
+---
+
+Delete Task (DELETE /tasks/<task_id>):
+
+- Handled by `deleteTask.py`  
+- Deletes a task with the specified `task_id`
+
+---
+
+Mark Task as Completed (PUT /tasks/<task_id>/complete):
+
+- Handled by `completeTask.py`  
+- Updates the task status to completed
+
+---
+
+Update Task Priority (PUT /tasks/<task_id>/priority):
+
+- Handled by `updatePriority.py`  
+- Changes the task priority to the one provided in the request
+
+---
+
+User Login (POST /login):
+
+- Handled by `login.py`  
+- Verifies login credentials and creates a new session, returning a token
+
+---
+
+User Logout (POST /logout):
+
+- Handled by `logout.py`  
+- Deletes the session based on the provided token
+
