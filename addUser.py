@@ -1,55 +1,31 @@
-from flask import Flask, jsonify, request
-import oracledb
+from flask import request, jsonify
+from db import get_connection
 
-app = Flask(__name__)
+def register_routes(app):
+    @app.route('/users', methods=['POST'])
+    def add_user():
+        data = request.get_json()
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
 
-# Function to create Oracle database connection
-def get_connection():
-    connection = oracledb.connect(
-        user='pawel',
-        password='rootuser1',
-        dsn='localhost:1521/XEPDB1'
-    )
-    return connection
+        if not username or not email or not password:
+            return jsonify({"error": "Missing fields"}), 400
 
-@app.route('/users', methods=['POST'])
-def add_user():
-    data = request.get_json()
-    username = data.get('username')
-    email = data.get('email')
-    password = data.get('password')
+        conn = get_connection()
+        cursor = conn.cursor()
 
-# validation if fields are empty or not
-    if not username or not email or not password:
-        return jsonify({"error": "Missing fields"}), 400 # code 400 is "Bad request"
+        cursor.execute("""
+            INSERT INTO users (username, email, password, created_at)
+            VALUES (:username, :email, :password, SYSDATE)
+        """, {
+            "username": username,
+            "email": email,
+            "password": password
+        })
 
-    conn = get_connection()
-    cursor = conn.cursor()
+        conn.commit()
+        cursor.close()
+        conn.close()
 
-    cursor.execute("""
-        INSERT INTO users (username, email, password, created_at)
-        VALUES (:username, :email, :password, SYSDATE)
-    """, {
-        "username": "testdodania",
-        "email": "testdodania@gmail.com",
-        "password": "testpassword"
-    })
-
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-    return jsonify({"message": "User created successfully"}), 201
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-""""
-BODY EXAMPLE:
-{
-        "username": "testdodania",
-        "email": "testdodania@gmail.com",
-        "password": "testpassword"
-}
-"""
+        return jsonify({"message": "User created successfully"}), 201
