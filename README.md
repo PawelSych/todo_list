@@ -15,5 +15,14 @@ AddTask
 
 GetTasks:
 ![image](https://github.com/user-attachments/assets/b52b6449-ea45-4976-98f9-209002bbbb59)
-DeletTask
+DeletTask:
 ![image](https://github.com/user-attachments/assets/91a5c397-0a24-4207-aad6-6083d50da970)
+Update priority:
+![image](https://github.com/user-attachments/assets/f7d850aa-e350-4273-8968-f61bf3e2521e)
+CompleteTask:
+![image](https://github.com/user-attachments/assets/e621bd0e-58b6-4ada-945f-66eb674f1877)
+Login:
+![image](https://github.com/user-attachments/assets/22b696d3-584b-4bd5-9508-e807694e4f4f)
+LogOut:
+![image](https://github.com/user-attachments/assets/a61b08c1-28ac-47d6-a434-ba2250b5afc3)
+
