@@ -2,23 +2,28 @@ from flask import request, jsonify
 from db import get_connection
 
 def register_routes(app):
-    @app.route('/tasks/<int:task_id>/priority', methods=['PUT'])
-    def update_priority(task_id):
+    @app.route('/tasks/<int:task_id>/complete', methods=['PUT'])
+    def mark_task_completed(task_id):
         data = request.get_json()
-        priority = data.get('priority')
+        completed = data.get('completed')
 
-        if priority not in [1, 2, 3]:
-            return jsonify({"error": "Priority must be 1 (low), 2 (medium), or 3 (high)"}), 400
+        if completed is None:
+            return jsonify({"error": "Missing 'completed' field"}), 400
+
+        if not isinstance(completed, bool):
+            return jsonify({"error": "'completed' must be true or false (boolean)"}), 400
+
+        completed_value = 1 if completed else 0
 
         conn = get_connection()
         cursor = conn.cursor()
 
         cursor.execute("""
             UPDATE tasks
-            SET priority = :priority, updated_at = SYSDATE
+            SET completed = :completed, updated_at = SYSDATE
             WHERE id = :task_id
         """, {
-            "priority": priority,
+            "completed": completed_value,
             "task_id": task_id
         })
 
@@ -31,4 +36,4 @@ def register_routes(app):
         if rows_updated == 0:
             return jsonify({"message": "Task not found"}), 404
 
-        return jsonify({"message": "Task priority updated"}), 200
+        return jsonify({"message": "Task marked as completed"}), 200
