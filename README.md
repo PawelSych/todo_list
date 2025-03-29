@@ -15,3 +15,5 @@ AddTask
 
 GetTasks:
 ![image](https://github.com/user-attachments/assets/b52b6449-ea45-4976-98f9-209002bbbb59)
+DeletTask
+![image](https://github.com/user-attachments/assets/91a5c397-0a24-4207-aad6-6083d50da970)
