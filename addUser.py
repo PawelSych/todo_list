@@ -43,3 +43,13 @@ def add_user():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+""""
+BODY EXAMPLE:
+{
+        "username": "testdodania",
+        "email": "testdodania@gmail.com",
+        "password": "testpassword"
+}
+"""
