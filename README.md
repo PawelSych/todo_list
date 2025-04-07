@@ -84,3 +84,7 @@ User Logout (POST /logout):
 - Handled by `logout.py`  
 - Deletes the session based on the provided token
 
+I've changed OracleDB to PostgradeSQL 
+![image](https://github.com/user-attachments/assets/5c910d84-b859-4862-bdfd-b173a8876047)
+
+I installed .env and keep all db informations there
