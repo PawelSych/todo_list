@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: project                    
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rootuser1
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  web:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: project                       
+      DB_USER: postgres
+      DB_PASSWORD: rootuser1
+      DB_HOST: db
+      DB_PORT: 5432
+
+volumes:
+  pgdata:
