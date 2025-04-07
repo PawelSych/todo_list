@@ -1,0 +1,10 @@
+How to run:
+Make sure you have Docker Desktop installed
+
+Open a terminal in the project directory
+
+Run: docker compose up --build
+
+The API will be available at: http://localhost:5000
+
+The PostgreSQL database (with sample data) will start automatically
