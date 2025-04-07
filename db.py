@@ -1,9 +1,15 @@
-import oracledb
+import psycopg2
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_connection():
-    connection = oracledb.connect(
-        user='pawel',
-        password='rootuser1',
-        dsn='localhost:1521/XEPDB1'
+    connection = psycopg2.connect(
+        dbname=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT")
     )
     return connection

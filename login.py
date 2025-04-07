@@ -17,8 +17,8 @@ def register_routes(app):
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT id, password FROM users WHERE username = :username
-        """, {"username": username})
+            SELECT id, password FROM users WHERE username = %s
+        """, (username,))
         user = cursor.fetchone()
 
         if not user:
@@ -39,13 +39,8 @@ def register_routes(app):
 
         cursor.execute("""
             INSERT INTO sessions (user_id, token, created_at, expires_at)
-            VALUES (:user_id, :token, :created_at, :expires_at)
-        """, {
-            "user_id": user_id,
-            "token": token,
-            "created_at": now,
-            "expires_at": expires
-        })
+            VALUES (%s, %s, %s, %s)
+        """, (user_id, token, now, expires))
 
         conn.commit()
         cursor.close()

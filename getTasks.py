@@ -15,8 +15,8 @@ def register_routes(app):
         cursor.execute("""
             SELECT id, title, priority, completed, created_at, updated_at
             FROM tasks
-            WHERE user_id = :user_id
-        """, {"user_id": user_id})
+            WHERE user_id = %s
+        """, (user_id,))
 
         rows = cursor.fetchall()
         tasks = []

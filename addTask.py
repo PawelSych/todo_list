@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from db import get_connection
+from db import get_connection  # zakładam, że masz już psycopg2/psycopg lub podobny
 
 def register_routes(app):
     @app.route('/newtask', methods=['POST'])
@@ -17,12 +17,8 @@ def register_routes(app):
 
         cursor.execute("""
             INSERT INTO tasks (user_id, title, priority, completed, created_at, updated_at)
-            VALUES (:user_id, :title, :priority, 0, SYSDATE, SYSDATE)
-        """, {
-            "user_id": user_id,
-            "title": title,
-            "priority": priority
-        })
+            VALUES (%s, %s, %s, FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        """, (user_id, title, priority))
 
         conn.commit()
         cursor.close()

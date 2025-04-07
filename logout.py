@@ -15,8 +15,8 @@ def register_routes(app):
 
         cursor.execute("""
             DELETE FROM sessions
-            WHERE token = :token
-        """, {"token": token})
+            WHERE token = %s
+        """, (token,))
 
         conn.commit()
         rows_deleted = cursor.rowcount

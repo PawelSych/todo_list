@@ -17,12 +17,8 @@ def register_routes(app):
 
         cursor.execute("""
             INSERT INTO users (username, email, password, created_at)
-            VALUES (:username, :email, :password, SYSDATE)
-        """, {
-            "username": username,
-            "email": email,
-            "password": password
-        })
+            VALUES (%s, %s, %s, CURRENT_TIMESTAMP)
+        """, (username, email, password))
 
         conn.commit()
         cursor.close()

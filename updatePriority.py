@@ -17,12 +17,9 @@ def register_routes(app):
 
         cursor.execute("""
             UPDATE tasks
-            SET priority = :priority, updated_at = SYSDATE
-            WHERE id = :task_id
-        """, {
-            "priority": priority,
-            "task_id": task_id
-        })
+            SET priority = %s, updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        """, (priority, task_id))
 
         conn.commit()
         rows_updated = cursor.rowcount

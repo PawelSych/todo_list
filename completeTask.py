@@ -13,19 +13,14 @@ def register_routes(app):
         if not isinstance(completed, bool):
             return jsonify({"error": "'completed' must be true or false (boolean)"}), 400
 
-        completed_value = 1 if completed else 0
-
         conn = get_connection()
         cursor = conn.cursor()
 
         cursor.execute("""
             UPDATE tasks
-            SET completed = :completed, updated_at = SYSDATE
-            WHERE id = :task_id
-        """, {
-            "completed": completed_value,
-            "task_id": task_id
-        })
+            SET completed = %s, updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        """, (completed, task_id))
 
         conn.commit()
         rows_updated = cursor.rowcount

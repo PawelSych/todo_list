@@ -7,7 +7,7 @@ def register_routes(app):
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("DELETE FROM tasks WHERE id = :id", {"id": task_id})
+        cursor.execute("DELETE FROM tasks WHERE id = %s", (task_id,))
         conn.commit()
 
         rows_deleted = cursor.rowcount
